@@ -872,6 +872,9 @@ def train_model(
 
     # Train the model
     trainer.train()
+    import gc
+    torch.cuda.empty_cache()
+    gc.collect()
 
     dist_print(
         f"✅ Training completed in {(time.time() - training_start_time) / 60:.2f} minutes"
@@ -895,6 +898,9 @@ def evaluate_model(trainer: Trainer, test_dataset: Dataset) -> Dict[str, float]:
 
     # Run evaluation
     test_results = trainer.evaluate(test_dataset)
+    import gc
+    torch.cuda.empty_cache()
+    gc.collect()
 
     dist_print(f"⏱️ Evaluation completed in {time.time() - start_time:.2f} seconds")
 
@@ -920,6 +926,10 @@ def save_model(
 
     # Save the model
     trainer.save_model(output_dir)
+    import gc
+    torch.cuda.empty_cache()
+    gc.collect()
+
 
     # Save the tokenizer
     tokenizer.save_pretrained(output_dir)
