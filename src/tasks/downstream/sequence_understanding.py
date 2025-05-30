@@ -29,6 +29,8 @@ from transformers import (
     AutoConfig,
 )
 
+from models.vit_prompt.model_with_prompt import PromptedSeqClassification
+
 # Set logging level for transformers
 transformers.logging.set_verbosity_info()
 
@@ -492,7 +494,7 @@ def setup_model(
                 "   Length extension mode is 'none'. No specific scaling or windowing technique applied from script beyond setting max_length."
             )
 
-    model = AutoModelForSequenceClassification.from_pretrained(
+    model = PromptedSeqClassification.from_pretrained(
         model_name,
         config=config,
         trust_remote_code=True,
