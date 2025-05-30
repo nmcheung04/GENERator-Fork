@@ -20,7 +20,7 @@ class PromptedSeqClassification(AutoModelForSequenceClassification):
         
         self.prompt_projector = PromptProjector(prompt_length, prompt_dim)
 
-    def foward(self, input_ids = None, attention_mask = None, **kwargs):
+    def forward(self, input_ids = None, attention_mask = None, **kwargs):
         inputs_embeds = self.base_model.get_inputs_embeddings()(input_ids)
         batch_size, seq_len, hidden_size = inputs_embeds.shape
 
